@@ -6,3 +6,9 @@ services:
     volumes:
       - .:/app
       - ./docker/symfony/.bashrc:/root/.bashrc
+
+  nginx:
+    build: docker/nginx
+    working_dir: /app
+    volumes:
+      - .:/app
