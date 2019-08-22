@@ -16,9 +16,9 @@ build:
 	echo "PROJECT_DIR=$(PROJECT_DIR)" >> $@
 
 docker-compose.override.yml:
-	[ "$(shell uname -s)" != "Darwin" ] \
-		&& cp docker/docker-compose.override.yml $@ \
-		|| cp docker/docker-compose.override.nfs.yml $@
+	[ "$(shell uname -s)" = "Darwin" ] \
+		&& cp docker/compose/nfs.yml $@ \
+		|| cp docker/compose/override.yml $@
 
 clean:
 	rm .env || true
