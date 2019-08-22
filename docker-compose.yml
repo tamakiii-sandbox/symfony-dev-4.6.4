@@ -5,8 +5,6 @@ services:
       context: docker/php
       target: ${ENVIRONMENT:-production}
     working_dir: /app
-    ports:
-      - ${PORT_XDEBUG:-9000}:9000
     volumes:
       - app:/app:delegated
       - ./docker/php/.bashrc:/root/.bashrc
