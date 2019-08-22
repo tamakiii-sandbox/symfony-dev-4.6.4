@@ -6,7 +6,7 @@ services:
       target: ${ENVIRONMENT:-production}
     working_dir: /app
     volumes:
-      - .:/app
+      - app:/app:delegated
       - ./docker/php/.bashrc:/root/.bashrc
 
   nginx:
@@ -17,5 +17,12 @@ services:
     ports:
       - ${PORT_HTTP:-8080}:80
     volumes:
-      - .:/app
+      - app:/app:delegated
       - ./docker/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+
+volumes:
+  app:
+    driver_opts:
+      type: none
+      device: ".${PROJECT_DIR}"
+      o: bind
