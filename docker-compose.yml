@@ -2,12 +2,12 @@ version: "3.7"
 services:
   php:
     build:
-      context: docker/symfony
+      context: docker/php
       target: production
     working_dir: /app
     volumes:
       - .:/app
-      - ./docker/symfony/.bashrc:/root/.bashrc
+      - ./docker/php/.bashrc:/root/.bashrc
 
   nginx:
     build:
