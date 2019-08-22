@@ -23,6 +23,6 @@ services:
 volumes:
   app:
     driver_opts:
-      type: "${DRIVER_TYPE:-none}"
-      device: "${DRIVER_DEVICE:-.}"
-      o: "${DRIVER_O:-bind}"
+      type: none
+      device: "${PROJECT_DIR}"
+      o: bind
