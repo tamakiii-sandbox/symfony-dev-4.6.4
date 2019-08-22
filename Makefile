@@ -1,33 +1,21 @@
-ENV := production
+ENVIRONMENT := production
+PORT_HTTP := 8080
 
-all:
-
-build:
+build: clean .env
 	docker-compose build
 
-production: \
-	clean \
-	env/production \
-	build
+production: env/production build
+development: env/development build
+debug: env/debug build
 
-development: \
-	clean \
-	env/development \
-	docker-compose.override.yml \
-	build
-
-debug: \
-	clean \
-	env/debug \
-	docker-compose.override.yml \
-	build
-
-docker-compose.override.yml:
-	cp docker/docker-compose.override.$(ENV).yml $@
+.env:
+	rm -rf $@ && touch $@
+	echo "PORT_HTTP=$(PORT_HTTP)" >> $@
+	echo "ENVIRONMENT=$(ENVIRONMENT)" >> $@
 
 env/%:
-	$(eval ENV := $(@F))
+	$(eval ENVIRONMENT := $(@F))
 
 clean:
+	rm .env || true
 	rm docker-compose.override.yml || true
-
