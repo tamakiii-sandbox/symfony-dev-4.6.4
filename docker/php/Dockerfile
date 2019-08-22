@@ -17,6 +17,6 @@ FROM development AS debug
 
 RUN apk add --update --no-cache --virtual .builddeps gcc libc-dev autoconf && \
     pecl install xdebug && \
-    echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20170718/xdebug.so" > /usr/local/etc/php/conf.d/xdebug.ini && \
     apk del .builddeps
 
+COPY php.ini /usr/local/etc/php/conf.d/xdebug.ini
