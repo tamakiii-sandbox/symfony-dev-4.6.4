@@ -36,6 +36,14 @@ services:
       - mysql:/var/lib/mysql
       - ./docker/mysql/initdb.d:/docker-entrypoint-initdb.d
 
+  flyway:
+    build:
+      context: docker/flyway
+      target: ${ENVIRONMENT:-production}
+    working_dir: /app
+    volumes:
+      - app:/app:delegated
+
 volumes:
   mysql:
   app:
