@@ -1,8 +1,8 @@
-FROM nginx:1.17.3-alpine AS prod
+FROM nginx:1.17.3-alpine AS production
 # ---
 
-FROM prod AS develop
+FROM production AS development
 
 # ---
 
-FROM develop AS debug
+FROM development AS debug

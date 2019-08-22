@@ -1,4 +1,4 @@
-FROM php:7.2-fpm-alpine AS prod
+FROM php:7.2-fpm-alpine AS production
 
 RUN apk add --update --no-cache bash git make
 
@@ -9,11 +9,11 @@ RUN git config --global user.email "you@example.com" && \
 
 # ---
 
-FROM prod AS develop
+FROM production AS development
 
 # ---
 
-FROM develop AS debug
+FROM development AS debug
 
 RUN apk add --update --no-cache gcc libc-dev autoconf && \
     pecl install xdebug && \
