@@ -1,14 +1,18 @@
 version: "3.7"
 services:
   php:
-    build: docker/symfony
+    build:
+      context: docker/symfony
+      target: prod
     working_dir: /app
     volumes:
       - .:/app
       - ./docker/symfony/.bashrc:/root/.bashrc
 
   nginx:
-    build: docker/nginx
+    build:
+      context: docker/nginx
+      target: prod
     working_dir: /app
     ports:
       - ${PORT_HTTP:-8080}:80
