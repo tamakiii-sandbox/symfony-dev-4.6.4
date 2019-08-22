@@ -1,20 +1,18 @@
 ENVIRONMENT := production
 PORT_HTTP := 8080
 
-build: clean .env
-	docker-compose build
+all: \
+	clean \
+	.env \
+	build
 
-production: env/production build
-development: env/development build
-debug: env/debug build
+build:
+	docker-compose build
 
 .env:
 	rm -rf $@ && touch $@
 	echo "PORT_HTTP=$(PORT_HTTP)" >> $@
 	echo "ENVIRONMENT=$(ENVIRONMENT)" >> $@
-
-env/%:
-	$(eval ENVIRONMENT := $(@F))
 
 clean:
 	rm .env || true
