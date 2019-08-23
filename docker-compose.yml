@@ -34,7 +34,6 @@ services:
     volumes:
       - app:/app:delegated
       - mysql:/var/lib/mysql
-      - ./docker/mysql/initdb.d:/docker-entrypoint-initdb.d
 
   flyway:
     build:

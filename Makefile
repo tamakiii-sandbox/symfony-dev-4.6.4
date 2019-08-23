@@ -17,9 +17,6 @@ up:
 down:
 	docker-compose down
 
-migrate:
-	docker-compose run --rm flyway -configFiles=flyway/conf/docker.conf -locations=filesystem:flyway/sql info
-
 .env:
 	echo "ENVIRONMENT=$(ENVIRONMENT)" >> $@
 	echo "PORT_HTTP=$(PORT_HTTP)" >> $@
