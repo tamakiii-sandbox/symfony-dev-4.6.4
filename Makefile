@@ -5,10 +5,17 @@ PROJECT_DIR := $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
 all: \
 	clean \
 	.env \
-	build
+	build \
+	up
 
 build:
 	docker-compose build
+
+up:
+	docker-compose up
+
+down:
+	docker-compose down
 
 .env:
 	echo "ENVIRONMENT=$(ENVIRONMENT)" >> $@
@@ -16,9 +23,8 @@ build:
 	echo "PROJECT_DIR=$(PROJECT_DIR)" >> $@
 
 docker-compose.override.yml:
-	[ "$(shell uname -s)" = "Darwin" ] \
-		&& cp docker/compose/nfs.yml $@ \
-		|| cp docker/compose/override.yml $@
+	cp docker/etc/docker-compose.override.yml $@
+	[ "$(shell uname -s)" = "Darwin" ] && cp docker/etc/docker-compose.override.nfs.yml $@
 
 clean:
 	rm .env || true
